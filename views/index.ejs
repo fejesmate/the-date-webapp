@@ -34,10 +34,24 @@
           <form>
               <div class="form-group">
                   <label for="pairLoc">Pair location:</label>
-                  <input id="pairLoc" type="text" for="pairLoc" placeholder="Enter a location" class="form-control"><br>
+                  <input id="pairLoc" type="text" for="pairLoc" placeholder="Enter a location" class="form-control"><br>				  
                   <label for="pairLoc">Own location:</label>
-                  <input id="ownLoc" type="text" for="ownLoc" placeholder="Enter a location" class="form-control">
+                  <input id="ownLoc" type="text" for="ownLoc" placeholder="Enter a location" class="form-control"><br>
+				  
+				  <label for="sel1">Type of place:</label>
+				  <select class="form-control" id="sel1">
+					<option>bar</option>
+					<option>restaurant</option>
+					<option>park</option>
+				  </select><br>
+				  <!-- 
                   <button class="btn-primary btn-lg" id="searchPlaces">Search!</button>
+				  -->
+				  <input type="button" class="btn-primary btn-lg" id="testBtn" value="search"/><br><br>
+				  <input type="button" class="btn btn-success" id="routeBtn" value="plan route"/>
+				  
+				 <input id="testDisp" type="text" class="form-control"><br>
+				  
               </div>
           </form>
 

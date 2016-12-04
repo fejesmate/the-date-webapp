@@ -25,7 +25,12 @@ function getPlaces(location, radius, type, map) {
         radius: radius,
         type: type
     }
-    service.nearbySearch(request, function(result, status){
+    service.nearbySearch({
+		location: location,
+        radius: radius,
+	type: type	},
+	
+	function(result, status){
         if (status == 'OK'){
             refreshList(result);
             for (var i = 0; i < result.length; i++){
@@ -75,8 +80,23 @@ function refreshList(places) {
             +"</div>"
             +"</li>";
         list.innerHTML += entry;
+		createMarker(place)
     });
 }
 
+function createMarker(place) {
+	var placeLoc = place.geometry.location;
+	var marker = new google.maps.Marker({
+		icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+		map: map,
+		position: place.geometry.location
+	  
+	});
+
+	google.maps.event.addListener(marker, 'click', function() {
+		infowindow.setContent(place.name);
+		infowindow.open(map, this);
+	});
+}
 
 

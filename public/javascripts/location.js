@@ -8,8 +8,37 @@
 var ownLocation;
 var parentLocation;
 
+
 function getOwnLocation(){
 
+}
+
+function averageCoords(loc1,loc2,map){
+	
+	var geocoder = new google.maps.Geocoder
+	
+	 var loc = {lat: (loc1.lat()+loc2.lat())/2, lng: (loc1.lng()+loc2.lng())/2};
+	 //var loc = {lat: loc1.lat(), lng: loc1.lng()	};
+	  geocoder.geocode({'location': loc}, function(results, status) {
+		if (status === 'OK') {
+		  if (results[1]) {
+			map.setZoom(11);
+			/*var marker = new google.maps.Marker({
+			  icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+			  position: loc,
+			  map: map
+			});*/
+			//infowindow.setContent(results[1].formatted_address);
+			//infowindow.open(map, marker);
+		  } else {
+			window.alert('No results found');
+		  }
+		} else {
+		  window.alert('Geocoder failed due to: ' + status);
+		}
+	  });
+	
+	return loc
 }
 
 function initSearching(map) {
@@ -22,6 +51,28 @@ function initSearching(map) {
     autocompletePairLoc.bindTo('bounds', map);
     var autocompleteOwnLoc = new google.maps.places.Autocomplete(inputOwnLoc);
     autocompleteOwnLoc.bindTo('bounds', map);
+	
+	
+	var pairLocInput = document.getElementById('pairLoc');
+  google.maps.event.addDomListener(pairLocInput, 'keydown', function(e) { 
+    if (e.keyCode == 13) { 
+        e.preventDefault(); 
+    }
+  }); 
+  	var ownLocInput = document.getElementById('ownLoc');
+  google.maps.event.addDomListener(ownLocInput, 'keydown', function(e) { 
+    if (e.keyCode == 13) { 
+        e.preventDefault(); 
+    }
+  });
+  /*
+  	var input = document.getElementById('pairLoc');
+  google.maps.event.addDomListener(input, 'keydown', function(e) { 
+    if (e.keyCode == 13) { 
+        e.preventDefault(); 
+    }
+  });
+  */
 
     console.log("initSearching");
     autocompletePairLoc.addListener('place_changed', function() {
@@ -80,6 +131,7 @@ function initSearching(map) {
         marker.setPosition(place.geometry.location);
         marker.setVisible(true);
     })
+	
 
 }
 function findRoute(map) {

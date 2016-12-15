@@ -5,9 +5,9 @@ a {
 
 .menu-img{
 <<<<<<< HEAD
-
+  max-width: 70%;
 =======
-  max-width: 450%;
+  max-width: 30%;
 >>>>>>> 2338031e2eb497edee460b4415f33a1331eda7c9
   height: auto;
 }
